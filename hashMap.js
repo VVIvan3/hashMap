@@ -5,7 +5,7 @@ class HashMap {
     this.loadFactor = loadFactor;
     this.capacity = capacity;
     this.occupied = 0;
-    this.bucketArray = new Array(capacity).fill(null)
+    this.bucketArray = new Array(capacity).fill(null);
   }
 
   static hash(key) {
@@ -18,29 +18,29 @@ class HashMap {
   }
 
   resizeHashMap() {
-    if (this.occupied >= (this.capacity * this.loadFactor)) {
-      const oldBucketArray = this.bucketArray
-      this.capacity *= 2
-      this.occupied = 0
-      this.bucketArray = new Array(this.capacity).fill(null)
+    if (this.occupied >= this.capacity * this.loadFactor) {
+      const oldBucketArray = this.bucketArray;
+      this.capacity *= 2;
+      this.occupied = 0;
+      this.bucketArray = new Array(this.capacity).fill(null);
 
       oldBucketArray.forEach((bucket) => {
-        let currentBucket = bucket
-        if (currentBucket !== null) currentBucket = bucket.nodeList
-        console.log(currentBucket)
+        let currentBucket = bucket;
+        if (currentBucket !== null) currentBucket = bucket.nodeList;
         while (currentBucket != null) {
           this.set(currentBucket.hashKey, currentBucket.value);
           currentBucket = currentBucket.nextNode;
         }
-      })
+      });
     }
   }
 
   set(key, value) {
-    this.resizeHashMap()
+    this.resizeHashMap();
     const hashedKey = HashMap.hash(key);
     const bucketIndex = hashedKey % this.capacity;
-    if (this.bucketArray[bucketIndex] === null) this.bucketArray[bucketIndex] = new LinkedList()
+    if (this.bucketArray[bucketIndex] === null)
+      this.bucketArray[bucketIndex] = new LinkedList();
     this.bucketArray[bucketIndex].append(value, hashedKey);
     this.occupied++;
   }
