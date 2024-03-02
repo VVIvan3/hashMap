@@ -9,6 +9,7 @@ class HashMap {
   }
 
   static hash(key) {
+    if (Number.isInteger(key)) return key;
     let hashCode = 0;
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
@@ -36,13 +37,13 @@ class HashMap {
   }
 
   set(key, value) {
-    this.resizeHashMap();
     const hashedKey = HashMap.hash(key);
     const bucketIndex = hashedKey % this.capacity;
     if (this.bucketArray[bucketIndex] === null)
       this.bucketArray[bucketIndex] = new LinkedList();
     this.bucketArray[bucketIndex].append(value, hashedKey);
     this.occupied++;
+    this.resizeHashMap();
   }
 
   get(key) {
@@ -85,3 +86,6 @@ testOne.set("three", "value12");
 testOne.set("four", "value112");
 testOne.set("fout", "value113");
 console.log(testOne.bucketArray);
+console.log(testOne.bucketArray[0].nodeList)
+// console.log(HashMap.hash("second"));
+// console.log(HashMap.hash(3388687476));
