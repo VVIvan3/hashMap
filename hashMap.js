@@ -59,7 +59,15 @@ class HashMap {
   }
 
   has(key) {
-    //
+    const hashedKey = HashMap.hash(key);
+    const bucket = this.bucketArray[hashedKey % this.capacity];
+    if (bucket === null) return false;
+    let node = bucket.nodeList;
+    while (node !== null) {
+      if (node.hashKey === hashedKey) return true;
+      node = node.nextNode;
+    }
+    return false;
   }
 
   remove(key) {
@@ -71,7 +79,8 @@ class HashMap {
   }
 
   clear() {
-    // check capacity etc
+    this.occupied = 0;
+    this.bucketArray = new Array(this.capacity).fill(null);
   }
 
   keys() {
