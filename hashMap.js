@@ -47,7 +47,15 @@ class HashMap {
   }
 
   get(key) {
-    //
+    const hashedKey = HashMap.hash(key);
+    const bucket = this.bucketArray[hashedKey % this.capacity];
+    if (bucket === null) return null;
+    let node = bucket.nodeList;
+    while (node !== null) {
+      if (node.hashKey === hashedKey) return node.value;
+      node = node.nextNode;
+    }
+    return null;
   }
 
   has(key) {
@@ -85,11 +93,14 @@ testOne.set("second", "value2");
 testOne.set("three", "value12");
 testOne.set("four", "value112");
 testOne.set("fout", "value113");
+console.log(testOne.get("key"));
+console.log(testOne.get("kee"));
+console.log(testOne.get("2"));
 // console.log(testOne.bucketArray);
 // console.log(testOne.bucketArray[0].nodeList
 
-
-const testTwo = new HashMap(4)
-testTwo.set("test", "old value")
-testTwo.set("test", "new value")
-console.log(testTwo.bucketArray)
+const testTwo = new HashMap(2);
+testTwo.set("test", "old value");
+testTwo.set("test", "new value");
+testTwo.set("testt", "another value");
+// console.log(testTwo.bucketArray)

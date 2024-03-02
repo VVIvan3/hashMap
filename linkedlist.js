@@ -74,17 +74,6 @@ export default class LinkedList {
     }
     return null;
   }
-
-  toString() {
-    let node = this.nodeList;
-    let string = "";
-    while (node != null) {
-      string += `( ${node.value} ) -> `;
-      node = node.nextNode;
-    }
-    string += null;
-    return string;
-  }
 }
 
 class Node {
