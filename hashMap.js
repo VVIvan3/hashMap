@@ -1,7 +1,10 @@
+import LinkedList from "./linkedlist.js";
+
 class HashMap {
-  constructor(capacity = 16, loadFactor = 0.75, ) {
-    this.loadFactor = loadFactor
-    this.capacity = capacity
+  constructor(capacity = 16, loadFactor = 0.75) {
+    this.loadFactor = loadFactor;
+    this.capacity = capacity;
+    this.occupied = 0;
     this.bucketArray = new Array(capacity).fill(null)
   }
 
@@ -14,8 +17,32 @@ class HashMap {
     return hashCode;
   }
 
+  resizeHashMap() {
+    if (this.occupied >= (this.capacity * this.loadFactor)) {
+      const oldBucketArray = this.bucketArray
+      this.capacity *= 2
+      this.occupied = 0
+      this.bucketArray = new Array(this.capacity).fill(null)
+
+      oldBucketArray.forEach((bucket) => {
+        let currentBucket = bucket
+        if (currentBucket !== null) currentBucket = bucket.nodeList
+        console.log(currentBucket)
+        while (currentBucket != null) {
+          this.set(currentBucket.hashKey, currentBucket.value);
+          currentBucket = currentBucket.nextNode;
+        }
+      })
+    }
+  }
+
   set(key, value) {
-    //
+    this.resizeHashMap()
+    const hashedKey = HashMap.hash(key);
+    const bucketIndex = hashedKey % this.capacity;
+    if (this.bucketArray[bucketIndex] === null) this.bucketArray[bucketIndex] = new LinkedList()
+    this.bucketArray[bucketIndex].append(value, hashedKey);
+    this.occupied++;
   }
 
   get(key) {
@@ -27,7 +54,7 @@ class HashMap {
   }
 
   remove(key) {
-    //
+    // check capacity etc
   }
 
   length() {
@@ -35,7 +62,7 @@ class HashMap {
   }
 
   clear() {
-    //
+    // check capacity etc
   }
 
   keys() {
@@ -51,5 +78,10 @@ class HashMap {
   }
 }
 
-const testOne = new HashMap();
-console.log(testOne.bucketArray)
+const testOne = new HashMap(4);
+testOne.set("key", "value");
+testOne.set("second", "value2");
+testOne.set("three", "value12");
+testOne.set("four", "value112");
+testOne.set("fout", "value113");
+console.log(testOne.bucketArray);
