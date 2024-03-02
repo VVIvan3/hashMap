@@ -45,14 +45,26 @@ export default class LinkedList {
     return node;
   }
 
-  pop() {
+  ///
+  /// TODO
+  ///
+
+  removeAt(hashCode) {
     let currentNode = this.nodeList;
-    let prevNode;
-    while (currentNode.nextNode !== null) {
+    let prevNode = currentNode;
+    if (currentNode.hashKey === hashCode) {
+      this.nodeList = currentNode.nextNode
+      return true;
+    }
+    while (currentNode !== null) {
+      if (currentNode.hashKey === hashCode) {
+        prevNode.nextNode = currentNode.nextNode;
+        return true;
+      }
       prevNode = currentNode;
       currentNode = currentNode.nextNode;
     }
-    prevNode.nextNode = null;
+    return false;
   }
 
   contains(value) {
