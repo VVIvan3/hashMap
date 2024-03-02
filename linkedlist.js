@@ -1,6 +1,6 @@
 export default class LinkedList {
   constructor() {
-    this.nodeList = null
+    this.nodeList = null;
   }
 
   append(value, hashKey) {
@@ -9,7 +9,17 @@ export default class LinkedList {
     if (this.nodeList === null) {
       this.nodeList = appendingNode;
     } else {
-      while (node.nextNode != null) node = node.nextNode;
+      while (node.nextNode != null) {
+        if (node.hashKey === hashKey) {
+          node.value = value;
+          return;
+        }
+        node = node.nextNode;
+      }
+      if (node.hashKey === hashKey) {
+        node.value = value;
+        return;
+      }
       node.nextNode = appendingNode;
     }
   }
@@ -22,18 +32,6 @@ export default class LinkedList {
       node = node.nextNode;
     }
     return counter;
-  }
-
-  head() {
-    return this.nodeList;
-  }
-
-  tail() {
-    let node = this.nodeList;
-    while (node.nextNode !== null) {
-      node = node.nextNode;
-    }
-    return node;
   }
 
   at(index) {
@@ -96,4 +94,3 @@ class Node {
     this.nextNode = nextNode;
   }
 }
-

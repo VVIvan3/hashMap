@@ -85,7 +85,11 @@ testOne.set("second", "value2");
 testOne.set("three", "value12");
 testOne.set("four", "value112");
 testOne.set("fout", "value113");
-console.log(testOne.bucketArray);
-console.log(testOne.bucketArray[0].nodeList);
-// console.log(HashMap.hash("second"));
-// console.log(HashMap.hash(3388687476));
+// console.log(testOne.bucketArray);
+// console.log(testOne.bucketArray[0].nodeList
+
+
+const testTwo = new HashMap(4)
+testTwo.set("test", "old value")
+testTwo.set("test", "new value")
+console.log(testTwo.bucketArray)
