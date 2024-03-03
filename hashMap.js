@@ -74,14 +74,14 @@ class HashMap {
     const hashedKey = HashMap.hash(key);
     const bucket = this.bucketArray[hashedKey % this.capacity];
     if (bucket.removeAt(hashedKey)) {
-      this.occupied--
-      return true
+      this.occupied--;
+      return true;
     }
     return false;
   }
 
   length() {
-    //
+    return this.occupied;
   }
 
   clear() {
@@ -120,13 +120,12 @@ testTwo.set("test", "new value");
 testTwo.set("testt", "another value");
 // console.log(testTwo.bucketArray)
 
-
 const testThree = new HashMap(5);
-testThree.set("test", "value 1")
-testThree.set("another", "value 2")
-testThree.set("not", "value 3")
-testThree.remove("another")
-testThree.remove("test")
+testThree.set("test", "value 1");
+testThree.set("another", "value 2");
+testThree.set("not", "value 3");
+testThree.remove("another");
+testThree.remove("test");
 // console.log(testThree.bucketArray)
-testThree.set('test', "val4")
+testThree.set("test", "val4");
 // console.log(testThree.bucketArray)
