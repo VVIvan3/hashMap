@@ -90,7 +90,16 @@ class HashMap {
   }
 
   keys() {
-    //
+    let keyArray = [];
+    this.bucketArray.forEach((bucket) => {
+      let currentBucket = bucket;
+      if (currentBucket !== null) currentBucket = bucket.nodeList;
+      while (currentBucket !== null) {
+        keyArray.push(currentBucket.hashKey);
+        currentBucket = currentBucket.nextNode;
+      }
+    });
+    return keyArray;
   }
 
   values() {
@@ -129,3 +138,10 @@ testThree.remove("test");
 // console.log(testThree.bucketArray)
 testThree.set("test", "val4");
 // console.log(testThree.bucketArray)
+console.log(testThree.length());
+console.log(testThree.has("not"));
+console.log(testThree.has("another"));
+console.log(testThree.keys());
+
+const emptyHashMap = new HashMap();
+console.log(emptyHashMap.keys());
