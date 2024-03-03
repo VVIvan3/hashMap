@@ -135,9 +135,9 @@ testOne.set("second", "value2");
 testOne.set("three", "value12");
 testOne.set("four", "value112");
 testOne.set("fout", "value113");
-// console.log(testOne.get("key"));
-// console.log(testOne.get("kee"));
-// console.log(testOne.get("2"));
+console.log(testOne.get("key"));
+console.log(testOne.get("kee"));
+console.log(testOne.get("2"));
 // console.log(testOne.bucketArray);
 // console.log(testOne.bucketArray[0].nodeList
 
